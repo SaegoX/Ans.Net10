@@ -1,4 +1,5 @@
-﻿using Ans.Net10.Common;
+﻿using _test_common.Framework;
+using Ans.Net10.Common;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 
@@ -40,7 +41,10 @@ namespace _test_common
 			SuppConsole.WriteLineParam("SuppApp.VSSolutionPath", SuppApp.VSSolutionPath);
 			Console.WriteLine();
 
-			SuppConsole.AppEnd();
+            var registry = DemoRegistry.Build(typeof(Program).Assembly);
+            new DemoMenu(registry).Run();
+
+            SuppConsole.AppEnd();
 
 		}
 
