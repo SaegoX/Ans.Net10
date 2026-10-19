@@ -34,9 +34,9 @@ public static class ObjInfoBuilderDemo
     {
         DemoConsole.Note("Разбор TestClass без obj — значения null");
         var b = new ObjInfoBuilder(typeof(TestClass));
-        DemoConsole.Case("InfoType == typeof(TestClass)", () => b.InfoType == typeof(TestClass), true);
-        DemoConsole.Case("Ctors.Count ≥ 1", () => b.Ctors.Count >= 1, true);
-        DemoConsole.Case("HasProperties", () => b.HasProperties, true);
+        DemoConsole.Case("InfoType == typeof(TestClass)",   () => b.InfoType == typeof(TestClass), true);
+        DemoConsole.Case("Ctors.Count ≥ 1",                 () => b.Ctors.Count >= 1, true);
+        DemoConsole.Case("HasProperties",                   () => b.HasProperties, true);
     }
 
     private static void WithObjectValues()
@@ -63,19 +63,19 @@ public static class ObjInfoBuilderDemo
 
         DemoConsole.Case("ReadWrite содержит Name", () =>
             b.ReadWriteProperties.Any(p => p.Name == "Name"), true);
-        DemoConsole.Case("ReadWrite содержит Age", () =>
+        DemoConsole.Case("ReadWrite содержит Age",  () =>
             b.ReadWriteProperties.Any(p => p.Name == "Age"), true);
         DemoConsole.Case("ReadOnly содержит ReadOnly", () =>
             b.ReadOnlyProperties.Any(p => p.Name == "ReadOnly"), true);
         DemoConsole.Case("WriteOnly содержит WriteOnly", () =>
             b.WriteOnlyProperties.Any(p => p.Name == "WriteOnly"), true);
 
-        DemoConsole.Case("HasReadWriteProperties", () => b.HasReadWriteProperties, true);
-        DemoConsole.Case("HasReadonlyProperties", () => b.HasReadonlyProperties, true);
-        DemoConsole.Case("HasWriteonlyProperties", () => b.HasWriteonlyProperties, true);
+        DemoConsole.Case("HasReadWriteProperties",  () => b.HasReadWriteProperties, true);
+        DemoConsole.Case("HasReadonlyProperties",   () => b.HasReadonlyProperties, true);
+        DemoConsole.Case("HasWriteonlyProperties",  () => b.HasWriteonlyProperties, true);
 
         DemoConsole.Note("TypeName для Name — \"string\"");
-        DemoConsole.Case("TypeName of Name", () =>
+        DemoConsole.Case("TypeName of Name",        () =>
             b.ReadWriteProperties.First(p => p.Name == "Name").TypeName, "string");
     }
 
@@ -84,16 +84,16 @@ public static class ObjInfoBuilderDemo
         DemoConsole.Note("Functions vs Methods, Generics");
         var b = new ObjInfoBuilder(typeof(TestClass));
 
-        DemoConsole.Case("DoSomething — в Methods (void)", () =>
+        DemoConsole.Case("DoSomething — в Methods (void)",  () =>
             b.Methods.Any(m => m.Name == "DoSomething"), true);
 
-        DemoConsole.Case("Calculate — в Functions", () =>
+        DemoConsole.Case("Calculate — в Functions",         () =>
             b.Functions.Any(f => f.Name == "Calculate"), true);
 
-        DemoConsole.Case("Echo<T> — в Functions", () =>
+        DemoConsole.Case("Echo<T> — в Functions",           () =>
             b.Functions.Any(f => f.Name == "Echo"), true);
 
-        DemoConsole.Case("Echo<T>.Generics != null", () =>
+        DemoConsole.Case("Echo<T>.Generics != null",        () =>
             b.Functions.First(f => f.Name == "Echo").Generics is not null, true);
 
         DemoConsole.Case("Calculate.Parameters.Count == 1", () =>
@@ -104,14 +104,14 @@ public static class ObjInfoBuilderDemo
     {
         DemoConsole.Note("Пустой класс — только ctor");
         var b = new ObjInfoBuilder(typeof(EmptyClass));
-        DemoConsole.Case("Ctors.Count ≥ 1", () => b.Ctors.Count >= 1, true);
-        DemoConsole.Case("HasProperties == false", () => b.HasProperties, false);
-        DemoConsole.Case("Functions.Count == 0", () => b.Functions.Count, 0);
-        DemoConsole.Case("Methods.Count == 0", () => b.Methods.Count, 0);
+        DemoConsole.Case("Ctors.Count ≥ 1",         () => b.Ctors.Count >= 1, true);
+        DemoConsole.Case("HasProperties == false",  () => b.HasProperties, false);
+        DemoConsole.Case("Functions.Count == 0",    () => b.Functions.Count, 0);
+        DemoConsole.Case("Methods.Count == 0",      () => b.Methods.Count, 0);
 
         DemoConsole.Note("typeof(object) — все методы унаследованы от object → отфильтрованы");
         var bObj = new ObjInfoBuilder(typeof(object));
-        DemoConsole.Case("object Functions пусто", () => bObj.Functions.Count, 0);
-        DemoConsole.Case("object Methods пусто", () => bObj.Methods.Count, 0);
+        DemoConsole.Case("object Functions пусто",  () => bObj.Functions.Count, 0);
+        DemoConsole.Case("object Methods пусто",    () => bObj.Methods.Count, 0);
     }
 }

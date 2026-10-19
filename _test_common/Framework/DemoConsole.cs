@@ -20,7 +20,7 @@ public static class DemoConsole
     public static void Note(string text)
         => SuppConsole.WriteColor(ConsoleColor.DarkGray, $"  · {text}\n");
 
-    /// <summary>Просто действие (void).</summary>
+    /// <summary>Процедура(просто действие) без результата(void).</summary>
     public static void Case(string label, Action action)
     {
 
@@ -33,7 +33,7 @@ public static class DemoConsole
 
     }
 
-    /// <summary>Функция — печатаем, что вернулось, без проверки.</summary>
+    /// <summary>Функция — печатаем, что вернулось, без проверки соответствия с заданным результатом (Считается выполненной, если не выкинула исключение).</summary>
     public static void Case<T>(string label, Func<T> func)
     {
 
@@ -47,7 +47,7 @@ public static class DemoConsole
 
     }
 
-    /// <summary>Функция — сравниваем с ожиданием.</summary>
+    /// <summary>Функция — сравниваем на соответствие с заданным результатом.</summary>
     public static void Case<T>(string label, Func<T> func, T expected)
     {
 
@@ -91,6 +91,7 @@ public static class DemoConsole
 
     }
 
+    /// <summary> Вид вывода: Цвет, структура строки, форма вывода исключения </summary>
     private static void Print(string label, string mark, string? actual, string? expected, Exception? ex, TimeSpan dt)
     {
 
@@ -108,6 +109,8 @@ public static class DemoConsole
 
     }
 
+    /// <summary> Формат вывода: Null выводится как строка, строка выводится оборачивается в кавычки, спецсимволы и экранируется, 
+    /// булиево значение выводится так же как строка, массивы выводятся в скобках через запятую. Все остальные значения имеют формат string</summary>
     private static string Format(object? v) => v switch
     {
 
